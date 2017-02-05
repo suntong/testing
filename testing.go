@@ -770,6 +770,32 @@ func (t *T) Report() {
 	}
 }
 
+// NewT returns a new tesing T instance.
+func NewT() *T {
+	t := &T{
+		common: common{
+			signal:  make(chan bool),
+			barrier: make(chan bool),
+			w:       os.Stdout,
+			chatty:  *chatty,
+		},
+		isParallel: false,
+	}
+	t = &T{
+		common: common{
+			barrier: make(chan bool),
+			signal:  make(chan bool),
+			//name:    testName,
+			parent: &t.common,
+			level:  t.level + 1,
+			chatty: t.chatty,
+		},
+		context: t.context,
+	}
+	t.w = indenter{&t.common}
+	return t
+}
+
 func RunTests(matchString func(pat, str string) (bool, error), tests []InternalTest) (ok bool) {
 	ok = true
 	if len(tests) == 0 && !haveExamples {
