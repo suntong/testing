@@ -575,7 +575,7 @@ func tRunner(t *T, fn func(t *T)) {
 		}
 		if err != nil {
 			t.Fail()
-			t.report()
+			t.Report()
 			panic(err)
 		}
 
@@ -598,7 +598,7 @@ func tRunner(t *T, fn func(t *T)) {
 			// test. See comment in Run method.
 			t.context.release()
 		}
-		t.report() // Report after all subtests have finished.
+		t.Report() // Report after all subtests have finished.
 
 		// Do not lock t.done to allow race detector to detect race in case
 		// the user does not appropriately synchronizes a goroutine.
@@ -753,7 +753,7 @@ func (m *M) Run() int {
 	return 0
 }
 
-func (t *T) report() {
+func (t *T) Report() {
 	if t.parent == nil {
 		return
 	}
