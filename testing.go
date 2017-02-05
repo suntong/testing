@@ -229,7 +229,7 @@ var (
 	outputDir = flag.String("test.outputdir", "", "directory in which to write profiles")
 
 	// Report as tests are run; default is silent for success.
-	chatty           = flag.Bool("test.v", false, "verbose: print additional output")
+	chatty           = flag.Bool("test.v", true, "verbose: print additional output")
 	count            = flag.Uint("test.count", 1, "run tests and benchmarks `n` times")
 	coverProfile     = flag.String("test.coverprofile", "", "write a coverage profile to the named file after execution")
 	match            = flag.String("test.run", "", "regular expression to select tests and examples to run")
